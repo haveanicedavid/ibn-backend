@@ -1,0 +1,25 @@
+{
+  "name": "ibn-test-backend",
+  "version": "1.0.0",
+  "description": "Backend for Ideas By Nature code test",
+  "main": "index.js",
+  "repository": "git@github.com:haveanicedavid/ibn-backend.git",
+  "author": "David Daniel",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server.js --exec babel-node"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "nodemon": "^1.11.0",
+    "standard": "^9.0.2"
+  }
+}
