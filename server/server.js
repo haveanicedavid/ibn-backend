@@ -3,10 +3,11 @@ import axios from 'axios'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose, { Schema } from 'mongoose'
+import config from '../config'
 
 const app = express()
 
-mongoose.connect('mongodb://localhost/exchange-snaps')
+mongoose.connect(config.db)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -44,8 +45,5 @@ app.get('/snaps', (req, res) => {
   })
 })
 
-const port = process.env.port || 8080
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-})
+export default app
