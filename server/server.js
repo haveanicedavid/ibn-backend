@@ -2,13 +2,23 @@ import express from 'express'
 import mongoose from 'mongoose'
 import config from '../config'
 import setupMiddleware from './middleware/setupMiddleware.js'
-import api from './api'
+import apiRoutes from './api/apiRoutes'
 
 const app = express()
 
 mongoose.connect(config.db)
+
+// abstracted out middleware
 setupMiddleware(app)
 
-app.use('/api', api)
+// API for routing
+app.use('/api', apiRoutes)
+
+// error handling
+app.use((err, req, res, next) => {
+  if (err) {
+    res.status(500).send('Oops')
+  }
+})
 
 export default app
