@@ -1,7 +1,13 @@
 import mongoose, { Schema } from 'mongoose'
 const SnapSchema = new Schema({
-  ltcRate: {
-    type: Number
+  BTCERates: {
+    type: Schema.Types.Mixed
+  },
+  PoloniexRates: {
+    type: Schema.Types.Mixed
+  },
+  createdAt: {
+    type: Date
   }
 })
 

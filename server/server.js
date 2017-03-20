@@ -3,6 +3,9 @@ import mongoose from 'mongoose'
 import config from '../config'
 import setupMiddleware from './middleware/setupMiddleware.js'
 import apiRoutes from './api/apiRoutes'
+// import bluebird from 'bluebird'
+
+// mongoose.Promise = bluebird
 
 const app = express()
 
@@ -17,7 +20,7 @@ app.use('/api', apiRoutes)
 // error handling
 app.use((err, req, res, next) => {
   if (err) {
-    res.status(500).send('Oops')
+    res.status(500).send(`Uh oh: ${err}`)
   }
 })
 

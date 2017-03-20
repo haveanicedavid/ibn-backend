@@ -1,50 +1,45 @@
 import Snap from './snapModel'
 import axios from 'axios'
+// import { fetchBTCE } from '../../../utilities/rateFetch'
+import {
+  fetchBTCELitecoin,
+  fetchBTCEDash,
+  fetchBTCEEthereum,
+  fetchPoloniex
+} from '../../../utilities/rateFetch'
 
-function fetchBTCELitecoin () {
-  return axios.get('https://btc-e.com/api/3/ticker/ltc_btc')
-}
-function fetchBTCEDash () {
-  return axios.get('https://btc-e.com/api/3/ticker/dsh_btc')
-}
-function fetchBTCEEthereum () {
-  return axios.get('https://btc-e.com/api/3/ticker/eth_btc')
-}
 export default {
   createSnap (req, res, next) {
     axios.all([
       fetchBTCELitecoin(),
       fetchBTCEEthereum(),
-      fetchBTCEDash()
-    ]).then(axios.spread((lte, eth, dsh) => {
-      console.log('lte', lte.data.ltc_btc)
-      console.log('eth', eth.data.eth_btc)
-      console.log('dsh', dsh.data.dsh_btc)
-      // const ltcRate = response.data.ltc_btc.buy
-      // const Rate = response.data.ltc_btc.buy
-      // const ltcSnap = new Snap({ ltcRate: rate })
-      // console.log(rate)
-      // ltcSnap.save()
-      // res.send(JSON.stringify(rate))
+      fetchBTCEDash(),
+      fetchPoloniex()
+    ]).then(axios.spread((btceLtc, btceEth, btceDsh, polo) => {
+      Snap.create({
+        BTCERates: {
+          ltcRate: btceLtc.data.ltc_btc.last,
+          ethRate: btceEth.data.eth_btc.last,
+          dshRate: btceDsh.data.dsh_btc.last
+        },
+        PoloniexRates: {
+          ltcRate: Number(polo.data.BTC_LTC.last),
+          ethRate: Number(polo.data.BTC_ETH.last),
+          dshRate: Number(polo.data.BTC_DASH.last)
+        },
+        createdAt: new Date()
+      }, (err, snap) => {
+        if (err) {
+          next(err)
+        } else {
+          res.send(snap)
+        }
+      })
     }))
     .catch((err) => {
       next(err)
     })
   },
-  // createSnap (req, res, next) {
-  //   axios
-  //     .get('https://btc-e.com/api/3/ticker/ltc_btc')
-  //     .then((response) => {
-  //       const rate = response.data.ltc_btc.buy // using BTC to buy ETH
-  //       const ltcSnap = new Snap({ ltcRate: rate })
-  //       console.log(rate)
-  //       ltcSnap.save()
-  //       res.send(JSON.stringify(rate))
-  //     })
-  //     .catch((err) => {
-  //       next(err)
-  //     })
-  // },
   getAllSnaps (req, res, next) {
     Snap.find({}).then((snaps) => {
       res.json(snaps)
