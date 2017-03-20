@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon index.js --exec babel-node",
     "mongo": "mongod --dbpath=./data/db",
-    "test": "mocha --compilers js:babel-register"
+    "test": "NODE_ENV=test mocha --compilers js:babel-register"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -28,6 +28,8 @@
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
+    "sinon": "^2.1.0",
+    "sinon-mongoose": "^1.3.0",
     "standard": "^9.0.2",
     "supertest": "^3.0.0"
   }
