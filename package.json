@@ -7,7 +7,8 @@
   "author": "David Daniel",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server.js --exec babel-node"
+    "dev": "nodemon server.js --exec babel-node",
+    "mongo": "mongod --dbpath=./data/db"
   },
   "dependencies": {
     "axios": "^0.15.3",
