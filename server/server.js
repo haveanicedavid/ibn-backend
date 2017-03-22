@@ -3,9 +3,6 @@ import mongoose from 'mongoose'
 import config from '../config'
 import setupMiddleware from './middleware/setupMiddleware.js'
 import apiRoutes from './api/apiRoutes'
-// import bluebird from 'bluebird'
-
-// mongoose.Promise = bluebird
 
 const app = express()
 

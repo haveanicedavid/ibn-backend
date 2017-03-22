@@ -3,10 +3,10 @@ import controller from './snapController.js'
 
 const router = Router()
 
-router.route('/') // /api/snaps/
-  .get(controller.createSnap)
+router.route('/create') // /api/snaps/create
+  .post(controller.createSnap)
 
-router.route('/all') // /api/snaps/all
-  .get(controller.getAllSnaps)
+router.route('/recent') // /api/snaps/all
+  .get(controller.getRecentSnaps)
 
 export default router
