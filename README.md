@@ -14,4 +14,3 @@ The majority of my time working on this has been spent doing research. While I h
 * I built this using babel-node to use ES6. This is great for development and testing, but apparently is very slow on production. If I were to start this challenge over, I would use ES5 syntax (refactoring should mainly just be changing ES6 `import` statements to commonJS `require()`)
 * I intentionally abstracted out many aspects of this app (models, routes, controllers, middleware) in an attempt to show how I would make the back-end scalable. If you would like, i'm happy to refactor to show how i'd arrange things in a less abstract way,
 * The challenge spec asked to include Coincap.io as one of the endpoints, but I couldn't get pricing info for ETH an DSH off of the API, so couldn't calculate the exchange rate.
-* I structured files in a way that I thought would mimick React components, with 
